@@ -4,6 +4,7 @@ import iac.schobshop.Schobshop.command.RegistrationCommand;
 import iac.schobshop.Schobshop.converter.AccountCommandToAccount;
 import iac.schobshop.Schobshop.converter.AddressCommandToAddress;
 import iac.schobshop.Schobshop.converter.CustomerCommandToCustomer;
+import iac.schobshop.Schobshop.exceptions.ObjectNotFoundException;
 import iac.schobshop.Schobshop.model.Account;
 import iac.schobshop.Schobshop.model.Address;
 import iac.schobshop.Schobshop.model.Customer;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -49,5 +51,14 @@ public class AccountserviceImpl implements AccountService {
         roles.add(role);
         account.setRoles(roles);
         accountRepository.save(account);
+    }
+
+    @Override
+    public Account findAccount(Long id) {
+        Optional<Account> account = accountRepository.findById(id);
+        if (!account.isPresent()){
+            throw new ObjectNotFoundException("Account", "id", id.toString());
+        }
+        return account.get();
     }
 }

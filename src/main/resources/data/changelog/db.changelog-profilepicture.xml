@@ -5,7 +5,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <include file="data/changelog/db.changelog-auth.xml"/>
-    <include file="data/changelog/db.changelog-account.xml"/>
-    <include file="data/changelog/db.changelog-profilepicture.xml"/>
+    <changeSet id="8" author="Johan Schobben">
+        <addColumn tableName="account">
+            <column name="profile_picture" type="longblob"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

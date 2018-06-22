@@ -24,6 +24,8 @@ public class Account implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     private @Getter Address billingAddress;
     private boolean credentialsExpired;
+    @Lob
+    private @Getter Byte[] profilePicture;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable( name = "account_role",
             joinColumns = { @JoinColumn(name = "account_id")},

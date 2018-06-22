@@ -12,12 +12,16 @@ public class AccountCommandToAccount implements Converter<AccountCommand, Accoun
 
     private AddressCommandToAddress addressCommandToAddressConverter;
     private CustomerCommandToCustomer customerCommandToCustomerConverter;
+    private FileToByteArray fileToByteArray;
 
 
     @Override
     public Account convert(AccountCommand command){
         Account account = new Account();
         account.setEmail(command.getEmail());
+        if (command.getProfilePicture() != null){
+            account.setProfilePicture(fileToByteArray.convert(command.getProfilePicture()));
+        }
         if (command.getAddressCommand()!= null){
             account.setBillingAddress(addressCommandToAddressConverter.convert(command.getAddressCommand()));
         }

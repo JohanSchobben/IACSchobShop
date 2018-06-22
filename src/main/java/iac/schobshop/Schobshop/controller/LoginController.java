@@ -30,9 +30,9 @@ public class LoginController {
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public String registrateShopper(@Valid @ModelAttribute("registration") RegistrationCommand registrationCommand, Model model, BindingResult bindingResult){
+    public String registrateShopper(@Valid @ModelAttribute("registration") RegistrationCommand registrationCommand, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return "account/register";
+            return "account/registration";
         }
         accountService.registerAccount(registrationCommand);
         return "redirect:/";

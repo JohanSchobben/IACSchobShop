@@ -6,4 +6,6 @@ import iac.schobshop.Schobshop.model.Account;
 public interface AccountService {
     Account findUserByEmail(String email);
     void registerAccount(RegistrationCommand registrationCommand);
+
+    Account findAccount(Long id);
 }

@@ -22,12 +22,14 @@ public class AccountCommandToAccountTest {
     private AddressCommandToAddress addressCommandToAddress;
     @Mock
     private CustomerCommandToCustomer customerCommandToCustomer;
+    @Mock
+    private FileToByteArray fileToByteArray;
     private AccountCommand accountCommand;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        accountCommandToAccount = new AccountCommandToAccount(addressCommandToAddress,customerCommandToCustomer);
+        accountCommandToAccount = new AccountCommandToAccount(addressCommandToAddress,customerCommandToCustomer,fileToByteArray);
 
         String testmail = "Test@mail.com";
         String testPassword = "12345";
