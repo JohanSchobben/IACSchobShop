@@ -1,0 +1,94 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="9" author="Johan Schobben">
+        <createTable tableName="purchase">
+            <column name="id" type="bigint(19)" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="purchase_date"
+                    type="datetime"
+                    defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="account_id" type="bigint(19)">
+                <constraints nullable="false"
+                             foreignKeyName="fk_purchase_account"
+                             references="account(id)"/>
+            </column>
+            <column name="delivery_address_id" type="bigint(19)">
+                <constraints nullable="true"
+                             foreignKeyName="fk_purchase_address"
+                             references="address(id)"/>
+            </column>
+            <column name="purchase_state"
+                    type="varchar(20)"
+                    defaultValue="IN_PROGRESS"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="10" author="Johan Schobben">
+        <createTable tableName="product">
+            <column name="id" type="bigint(19)" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="price" type="decimal(8,2)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="product_image" type="longblob"/>
+            <column name="sellable" type="bit" defaultValue="0"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="11" author="Johan Schobben">
+        <createTable tableName="purchase_line">
+            <column name="id" type="bigint(19)" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="product_id" type="bigint(19)">
+                <constraints nullable="false"
+                             foreignKeyName="fk_purchase-line_product"
+                             references="product(id)"/>
+            </column>
+            <column name="amount" type="int" defaultValue="1"/>
+            <column name="price" type="decimal(8,2)"/>
+            <column name="purchase_id" type="bigint(19)">
+                <constraints nullable="false"
+                             foreignKeyName="fk_purchase-line_purchase"
+                             references="purchase(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="12" author="categories">
+        <createTable tableName="category">
+            <column name="id" type="bigint(19)" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="13" author="Johan Schobben">
+        <createTable tableName="product_categories">
+            <column name="product_id" type="bigint(19)">
+                <constraints primaryKey="true"
+                             foreignKeyName="fk_product-category_product"
+                             references="product(id)"/>
+            </column>
+            <column name="category_id" type="bigint(19)">
+                <constraints primaryKey="true"
+                             foreignKeyName="fk_product-category_category"
+                             references="category(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

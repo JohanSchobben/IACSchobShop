@@ -8,4 +8,5 @@
     <include file="data/changelog/db.changelog-auth.xml"/>
     <include file="data/changelog/db.changelog-account.xml"/>
     <include file="data/changelog/db.changelog-profilepicture.xml"/>
+    <include file="data/changelog/db.changelog-order.xml"/>
 </databaseChangeLog>
