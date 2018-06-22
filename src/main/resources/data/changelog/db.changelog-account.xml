@@ -1,0 +1,64 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="4" author="Johan Schobben">
+        <createTable tableName="address">
+            <column name="id"
+                    type="bigint(19)"
+                    autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="street" type="varchar(50)"/>
+            <column name="number" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="postal_code" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5" author="Johan Schobben">
+        <createTable tableName="customer">
+            <column name="id" type="bigint(19)" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="last_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id" type="bigint(19)">
+                <constraints foreignKeyName="customer-account_id"
+                             references="address(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="6" author="Johan Schobben">
+        <addColumn tableName="account">
+            <column name="billing_address_id" type="bigint(19)">
+                <constraints foreignKeyName="account-address_id"
+                             references="address(id)"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="account">
+            <column name="customer_id" type="bigint(19)">
+                <constraints foreignKeyName="account-customer_id"
+                             references="customer(id)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    
+</databaseChangeLog>

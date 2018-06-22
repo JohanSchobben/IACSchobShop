@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm navbar-light bg-primary" th:fragment="header">
+    <a class="navbar-brand text-white" href="/">SchobShop</a>
+    <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon text-white"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-sm-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link text-white mr-auto" id="dropdown-nav__shopping" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shopping</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown-nav__user">
+                    <h5 class="dropdown-header text-primary">Categories</h5>
+                    <div class="dropdown-divider"></div>
+                    <!--<a class="dropdown-item" th:each="category : ${categories}" th:text="${category.name}" th:href="@{'/category/'+${category.id}}">My orders</a>-->
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-sm-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link text-white" id="dropdown-nav__shopping-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons">shopping_cart</i></a>
+                <form class="dropdown-menu dropdown-menu-right dropdown-menu-shopping-cart" aria-labelledby="dropdown-nav__shopping-cart">
+                    <div th:insert="shop/shoppingcart :: shoppingcart"></div>
+                </form>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link  text-white"  id="dropdown-nav__user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-nav__user">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Sign out</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+
+
+</body>
+</html>

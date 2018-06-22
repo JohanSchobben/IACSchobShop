@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+
+<meta charset="UTF-8">
+<title>Register</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<!--/*@thymesVar id="registration" type="com.webshop.WebshopIAC.commands.RegistrationCommand"*/-->
+
+<div layout:fragment="page-content" class="container mt-5">
+    <div class="row ">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-2 mb-5">
+                            <h1>Sign Up!</h1>
+                        </div>
+                    </div>
+                    <form method="post" th:action="@{/register}" th:object="${registration}" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-10 offset-md-2">
+                                <p th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                    Please Correct the errors
+                                </p>
+                                <h2>User Specific information</h2>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text"
+                                       class="form-control"
+                                       id="email"
+                                       placeholder="Email"
+                                       th:errorclass="'is-invalid'"
+                                       th:field="*{account.email}">
+                                <div class="w-100 alert alert-danger mt-3" th:if="${#fields.hasErrors('account.email')}">
+                                    <ul class="input-feedback">
+                                        <li th:each="err : ${#fields.errors('account.email')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="profile-picture" class="col-sm-2 col-form-label">Profile picture</label>
+                            <div class="col-sm-10">
+                                <input type="file"
+                                       class="form-control"
+                                       th:errorclass="'is-invalid'"
+                                       id="profile-picture"
+                                       placeholder="Select an image"
+                                       th:field="*{account.profilePicture}">
+                                <div class="w-100 alert alert-danger mt-3" th:if="${#fields.hasErrors('account.profilePicture')}">
+                                    <ul class="input-feedback">
+                                        <li th:each="err : ${#fields.errors('account.profilePicture')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password"
+                                       class="form-control"
+                                       th:errorclass="'is-invalid'"
+                                       id="password" placeholder="Password"
+                                       th:field="*{account.password}">
+                                <div class="w-100 alert alert-danger mt-3" th:if="${#fields.hasErrors('account.password')}">
+                                    <ul class="input-feedback">
+                                        <li th:each="err : ${#fields.errors('account.password')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-sm-2 col-form-label">Password Confirm</label>
+                            <div class="col-sm-10">
+                                <input type="password"
+                                       class="form-control"
+                                       th:errorclass="'is-invalid'"
+                                       id="password-confirm"
+                                       placeholder="password confirm"
+                                       th:field="*{account.passwordConfirm}">
+                                <div class="w-100 alert alert-danger mt-3" th:if="${#fields.hasErrors('account.passwordConfirm')}">
+                                    <ul class="input-feedback">
+                                        <li th:each="err : ${#fields.errors('account.passwordConfirm')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 offset-md-2">
+                                <h2>Customer Specific information</h2>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="first-name" class="col-sm-2 col-form-label">first name:</label>
+                            <div class="col-sm-10">
+                                <input type="text"
+                                       class="form-control"
+                                       th:errorclass="'is-invalid'"
+                                       id="first-name"
+                                       placeholder="First name"
+                                       th:field="*{customer.firstName}">
+                                <div class="w-100 alert alert-danger mt-3" th:if="${#fields.hasErrors('customer.firstName')}">
+                                    <ul class="input-feedback">
+                                        <li th:each="err : ${#fields.errors('customer.firstName')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="last-name" class="col-sm-2 col-form-label">last name:</label>
+                            <div class="col-sm-10">
+                                <input type="text"
+                                       class="form-control"
+                                       th:errorclass="'is-invalid'"
+                                       id="last-name"
+                                       placeholder="Last name"
+                                       th:field="*{customer.lastName}">
+                                <div class="w-100 alert alert-danger mt-3" th:if="${#fields.hasErrors('customer.lastName')}">
+                                    <ul class="input-feedback">
+                                        <li th:each="err : ${#fields.errors('customer.lastName')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 offset-md-2">
+                                <h2>Address</h2>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="street" class="col-sm-2 col-form-label">street:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="street" placeholder="Street" th:field="*{address.street}">
+                                <div class="w-100 alert alert-danger mt-3" th:if="${#fields.hasErrors('address.street')}">
+                                    <ul class="input-feedback">
+                                        <li th:each="err : ${#fields.errors('address.street')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="number" class="col-sm-2 col-form-label">number</label>
+                            <div class="col-sm-10">
+                                <input type="text"
+                                       class="form-control"
+                                       th:errorclass="'is-invalid'"
+                                       id="number"
+                                       placeholder="number"
+                                       th:field="*{address.number}">
+                                <div class="w-100 alert alert-danger mt-3" th:if="${#fields.hasErrors('address.number')}">
+                                    <ul class="input-feedback">
+                                        <li th:each="err : ${#fields.errors('address.number')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="postal-code" class="col-sm-2 col-form-label">Postal code</label>
+                            <div class="col-sm-10">
+                                <input type="text"
+                                       class="form-control"
+                                       th:errorclass="'is-invalid'"
+                                       id="postal-code"
+                                       placeholder="Postal Code"
+                                       th:field="*{address.postalCode}">
+                                <div class="w-100 alert alert-danger mt-3" th:if="${#fields.hasErrors('address.postalCode')}">
+                                    <ul class="input-feedback">
+                                        <li th:each="err : ${#fields.errors('address.postalCode')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="city" class="col-sm-2 col-form-label">city</label>
+                            <div class="col-sm-10">
+                                <input type="text"
+                                       class="form-control"
+                                       th:errorclass="'is-invalid'"
+                                       id="city" placeholder="city"
+                                       th:field="*{address.city}">
+                                <div class="w-100 alert alert-danger mt-3" th:if="${#fields.hasErrors('address.city')}">
+                                    <ul class="input-feedback">
+                                        <li th:each="err : ${#fields.errors('address.city')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="country" class="col-sm-2 col-form-label">country</label>
+                            <div class="col-sm-10">
+                                <input type="text"
+                                       class="form-control"
+                                       th:errorclass="'is-invalid'"
+                                       id="country"
+                                       placeholder="country"
+                                       th:field="*{address.country}">
+                                <div class="w-100 alert alert-danger mt-3" th:if="${#fields.hasErrors('address.country')}">
+                                    <ul class="input-feedback">
+                                        <li th:each="err : ${#fields.errors('address.country')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10 offset-sm-2">
+                                <button type="submit" class="btn btn-primary ml-auto">Sign up</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">SchobShop</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}">
+    <link type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<div id="app">
+    <div class="container">
+        <nav th:insert="layout/header :: header">...</nav>
+    </div>
+    <div layout:fragment="page-content">
+    </div>
+</div>
+<script type="text/javascript" src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/popper.js/1.14.1/umd/popper.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{'/js/ShoppingCart.js'}"></script>
+</body>
+</html>

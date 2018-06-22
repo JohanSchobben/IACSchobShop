@@ -1,0 +1,60 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="1" author="Johan Schobben">
+        <createTable tableName="account">
+            <column name="id"
+                    type="bigint(19)"
+                    autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="email"
+                    type="varchar(50)">
+                <constraints nullable="false"
+                             unique="true" />
+            </column>
+            <column name="password"
+                    type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active"
+                    type="bit">
+                <constraints nullable="false"/>
+            </column>
+            <column name="credentials_expired"
+                    type="bit">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="Johan Schobben">
+        <createTable tableName="role">
+            <column name="id"
+                    autoIncrement="true"
+                    type="bigint(19)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="role" type="varchar(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="Johan Schobben">
+        <createTable tableName="account_role">
+            <column name="account_id" type="bigint(19)">
+                <constraints primaryKey="true"
+                             foreignKeyName="account_role_account-id"
+                             references="account(id)"/>
+            </column>
+            <column name="role_id" type="bigint(19)">
+                <constraints primaryKey="true"
+                             foreignKeyName="account_role_role-id"
+                             references="account(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

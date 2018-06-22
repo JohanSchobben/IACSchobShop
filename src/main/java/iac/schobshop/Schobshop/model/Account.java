@@ -1,24 +1,34 @@
 package iac.schobshop.Schobshop.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
+@Setter
 public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String email;
+    @Column(unique = true)
+    private @Getter String email;
     private String password;
     private boolean active;
+    @OneToOne(cascade = CascadeType.ALL)
+    private @Getter Customer customer;
+    @OneToOne(cascade = CascadeType.ALL)
+    private @Getter Address billingAddress;
     private boolean credentialsExpired;
-
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable( name = "account_role",
+            joinColumns = { @JoinColumn(name = "account_id")},
+            inverseJoinColumns = { @JoinColumn(name = "role_id")})
+    private @Getter @Setter Set<Role> roles;
 
 
     @Override

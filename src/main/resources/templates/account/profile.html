@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+
+<meta charset="UTF-8">
+<title>Register</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<!--/*@thymesVar id="registration" type="com.webshop.WebshopIAC.commands.RegistrationCommand"*/-->
+
+<div layout:fragment="page-content" class="container mt-5">
+    <div class="card">
+        <div class="card-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <h1 th:text="${session.account.customer.firstName}+ ' ' + ${session.account.customer.lastName}">Hello world</h1>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <img src="'/profile/image/'+${session.account.customer.id}" alt="Profile Picture" class="img-responsive img-fluid">
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>First name</th>
+                                <td th:text="${session.account.customer.firstName}"></td>
+                            </tr>
+                            <tr>
+                                <th>last name</th>
+                                <td th:text="${session.account.customer.lastName}"></td>
+                            </tr>
+                            <tr>
+                                <th>email</th>
+                                <td th:text="${session.account.email}"></td>
+                            </tr>
+                            <tr>
+                                <th>street</th>
+                                <td th:text="${session.account.customer.address.street}"></td>
+                            </tr>
+                            <tr>
+                                <th>number</th>
+                                <td th:text="${session.account.customer.address.number}"></td>
+                            </tr>
+                            <tr>
+                                <th>Postal Code</th>
+                                <td th:text="${session.account.customer.address.postalCode}"></td>
+                            </tr>
+                            <tr>
+                                <th>City</th>
+                                <td th:text="${session.account.customer.address.city}"></td>
+                            </tr>
+                            <tr>
+                                <th>Country</th>
+                                <td th:text="${session.account.customer.address.country}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
