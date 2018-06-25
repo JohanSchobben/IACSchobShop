@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${product.name}"></title>
+</head>
+<body>
+<div class="container mt-5" layout:fragment="page-content">
+    <div class="row">
+        <div class="col">
+            <h1 th:text="${product.name}"></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <img th:if="${product.productImage != null}" class="img-fluid" th:src="@{'/product/image/'+${product.id}}" alt="Card image cap">
+            <img th:if="${product.productImage == null}" class="img-fluid" src="http://www.indiantradebird.in/images/noimage.jpg" alt="Card image cap">
+        </div>
+        <div class="col-md-9">
+            <p th:text="${product.description}"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col my-3 ml-auto">
+            <h4 class="text-right" th:text="${'€  '+#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 ml-auto">
+            <input type="hidden" th:value="${product.id}" th:data-price="${product.price}" th:data-name="${product.name}" id="product-info">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="order-amount" value="1">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" id="order-button" type="button">add to shopping cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -78,7 +78,7 @@ var getShoppingCart = function (){
             Accept: "application/json;",
         },
         success: function(responseData){
-            shoppingCartLines = responseData.items;
+            shoppingCartLines = responseData.items || [];
             shoppingCartElement.html(generateShoppingCartLineHTML());
         }
     });

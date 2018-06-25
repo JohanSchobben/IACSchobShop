@@ -1,0 +1,25 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="13" author="Johan Schobben">
+        <insert tableName="category">
+            <column name="name" value="New" />
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Garden" />
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Books" />
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Toys" />
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Electronics" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

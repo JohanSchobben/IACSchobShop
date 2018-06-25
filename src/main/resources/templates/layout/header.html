@@ -14,7 +14,7 @@
                 <div class="dropdown-menu" aria-labelledby="dropdown-nav__user">
                     <h5 class="dropdown-header text-primary">Categories</h5>
                     <div class="dropdown-divider"></div>
-                    <!--<a class="dropdown-item" th:each="category : ${categories}" th:text="${category.name}" th:href="@{'/category/'+${category.id}}">My orders</a>-->
+                    <a class="dropdown-item" th:each="category : ${categories}" th:text="${category.name}" th:href="@{'/category/'+${category.id}}">My orders</a>
                 </div>
             </li>
         </ul>

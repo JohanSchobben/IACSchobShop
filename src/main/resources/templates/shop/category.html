@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>category</title>
+</head>
+<body>
+<div layout:fragment="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 th:text="${category.name}">category</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mt-5" th:each="product : ${products}">
+                <div class="card">
+                    <div class="card-content">
+                        <img class="card-img-top" th:if="${product.productImage != null}" th:src="@{'/product/'+${product.id}+'/image'}" alt="Card image cap">
+                        <img class="card-img-top" th:if="${product.productImage == null}" src="http://www.indiantradebird.in/images/noimage.jpg" alt="Card image cap">
+                        <h5 class="card-title" th:text="${product.name}">Card title</h5>
+                        <p th:text="${product.description}"></p>
+                        <h5 th:text="${'€'+#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"></h5>
+                        <a th:href="@{'/product/'+${product.id}}">More info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -26,4 +26,13 @@ public class Purchase {
     private PurchaseState purchaseState;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchase")
     private Set<PurchaseLine> purchaseLines;
+
+    @Transient
+    public double getTotalPrice(){
+        double totalPrice = 0;
+        for (PurchaseLine purchaseLine : purchaseLines){
+            totalPrice+= purchaseLine.getPrice();
+        }
+        return totalPrice;
+    }
 }

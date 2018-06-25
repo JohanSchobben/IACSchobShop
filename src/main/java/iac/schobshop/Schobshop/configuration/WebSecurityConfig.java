@@ -3,9 +3,11 @@ package iac.schobshop.Schobshop.configuration;
 import iac.schobshop.Schobshop.model.Account;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -46,7 +48,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/home","/index", "/").permitAll()
                 .antMatchers("/category").permitAll()
-                .antMatchers("/profile")
+                .antMatchers("/api/**").permitAll().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/profile","/order")
                     .authenticated()
                     .and()
                     .formLogin()
@@ -54,5 +58,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/profile")
                     .usernameParameter("email")
                     .passwordParameter("password").permitAll();
+        http.cors().disable();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/resources/**", "/webjars/**", "/static/**", "/css/**",  "/js/**", "/images/**");
     }
 }

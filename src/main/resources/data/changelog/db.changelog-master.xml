@@ -9,4 +9,5 @@
     <include file="data/changelog/db.changelog-account.xml"/>
     <include file="data/changelog/db.changelog-profilepicture.xml"/>
     <include file="data/changelog/db.changelog-order.xml"/>
+    <include file="data/changelog/db.changelog-insert-categories.xml"/>
 </databaseChangeLog>

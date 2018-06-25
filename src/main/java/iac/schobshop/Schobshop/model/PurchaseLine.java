@@ -21,4 +21,10 @@ public class PurchaseLine {
     private double price;
     @ManyToOne
     private Purchase purchase;
+
+
+
+    public void setPrice(){
+        this.price = this.product.getPrice() * this.amount;
+    }
 }
